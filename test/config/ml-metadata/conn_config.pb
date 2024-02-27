@@ -1,6 +1,10 @@
 connection_config {
-  sqlite {
-    filename_uri: '/tmp/shared/metadata.sqlite.db'
-    connection_mode: READWRITE_OPENCREATE
+  postgresql {
+    host: 'pgserver'
+    port: '5432'
+    user: 'postgres'
+    password: 'mypsw'
+    dbname: 'pgserver'
+    skip_db_creation: false
   }
 }

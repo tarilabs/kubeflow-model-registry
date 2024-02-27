@@ -3,16 +3,31 @@ services:
   mlmd-server:
     image: gcr.io/tfx-oss-public/ml_metadata_store_server:1.14.0
     container_name: mlmd-server
+    depends_on:
+      pgserver:
+        condition: service_healthy
     ports:
       - "9090:8080"
     environment:
       - METADATA_STORE_SERVER_CONFIG_FILE=/tmp/shared/conn_config.pb
     volumes:
       - ./test/config/ml-metadata:/tmp/shared
-  model-registry:
-    image: quay.io/opendatahub/model-registry:latest
-    command: ["proxy", "--mlmd-hostname", "localhost", "--mlmd-port", "9090"]
-    container_name: model-registry
-    network_mode: host
-    depends_on:
-      - mlmd-server
+  pgserver:
+    image: "postgres:12"
+    restart: always
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mypsw
+      PGUSER: postgres
+      PGPASSWORD: mypsw
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+volumes:
+  pgdata:
