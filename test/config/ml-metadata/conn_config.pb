@@ -1,10 +1,10 @@
 connection_config {
-  postgresql {
-    host: 'pgserver'
-    port: '5432'
-    user: 'postgres'
-    password: 'mypsw'
-    dbname: 'pgserver'
+  mysql {
+    host: 'msqlserver'
+    port: 3306
+    user: 'sandbox_user'
+    password: 'passpass'
+    database: 'sandbox'
     skip_db_creation: false
   }
 }
