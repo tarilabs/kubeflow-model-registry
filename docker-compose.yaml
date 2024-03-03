@@ -1,7 +1,8 @@
 version: '3'
 services:
   mlmd-server:
-    image: gcr.io/tfx-oss-public/ml_metadata_store_server:1.14.0
+    image: quay.io/mmortari/ml_metadata_store_server:latest
+    platform: linux/amd64
     container_name: mlmd-server
     depends_on:
       pgserver:
