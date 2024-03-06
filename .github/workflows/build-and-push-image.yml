@@ -47,7 +47,7 @@ jobs:
         shell: bash
         run: ./scripts/build_deploy.sh
       - name: Tag Latest
-        if: env.BUILD_CONTEXT == 'main'
+        if: env.BUILD_CONTEXT == 'tag'
         shell: bash
         env:
           IMG: quay.io/${{ env.QUAY_ORG }}/${{ env.QUAY_IMG_REPO }}
