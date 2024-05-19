@@ -7,14 +7,18 @@ spec:
   - kubeflow-gateway
   hosts:
   - '*'
-  tcp:
+  http:
   - match:
-    - port: 8080
+      - uri:
+          prefix: /model-registry/
+    rewrite:
+      uri: /
     route:
     - destination:
         host: model-registry-service.kubeflow.svc.cluster.local
         port:
           number: 8080
+  tcp:
   - match:
       - port: 9090
     route:
