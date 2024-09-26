@@ -14,7 +14,7 @@ DOCKER ?= docker
 # default Dockerfile
 DOCKERFILE ?= Dockerfile
 # container registry, default to empty (dockerhub) if not explicitly set
-IMG_REGISTRY ?= 
+IMG_REGISTRY ?= quay.io
 # container image organization
 IMG_ORG ?= kubeflow
 # container image version
